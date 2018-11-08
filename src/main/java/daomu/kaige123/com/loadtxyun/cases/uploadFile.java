@@ -20,6 +20,7 @@ public class uploadFile {
 
         //文件桶,桶中的要定的key,文件
         PutObjectRequest putObjectRequest = new PutObjectRequest(config.bucketName, key, localFile);
+        //上传
         PutObjectResult putObjectResult = config.cosClient.putObject(putObjectRequest);
 
         //文件上传到云服务器后，获得文件的URL

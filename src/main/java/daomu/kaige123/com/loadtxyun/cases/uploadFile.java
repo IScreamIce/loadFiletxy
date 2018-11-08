@@ -5,6 +5,7 @@ import com.qcloud.cos.model.PutObjectResult;
 import daomu.kaige123.com.loadtxyun.config.config;
 
 import java.io.File;
+import java.util.Date;
 
 public class uploadFile {
 
@@ -20,6 +21,10 @@ public class uploadFile {
         //文件桶,桶中的要定的key,文件
         PutObjectRequest putObjectRequest = new PutObjectRequest(config.bucketName, key, localFile);
         PutObjectResult putObjectResult = config.cosClient.putObject(putObjectRequest);
+
+        Date expiration = new Date(new Date().getTime() + 3600l * 1000 * 24 * 365 * 10);
+        String url = config.cosClient.generatePresignedUrl(config.bucketName, key, expiration).toString();
+        System.out.println(url);
     }
 
 }

@@ -22,9 +22,15 @@ public class uploadFile {
         PutObjectRequest putObjectRequest = new PutObjectRequest(config.bucketName, key, localFile);
         PutObjectResult putObjectResult = config.cosClient.putObject(putObjectRequest);
 
+        //文件上传到云服务器后，获得文件的URL
         Date expiration = new Date(new Date().getTime() + 3600l * 1000 * 24 * 365 * 10);
         String url = config.cosClient.generatePresignedUrl(config.bucketName, key, expiration).toString();
         System.out.println(url);
+        
+        //最后得到URL(可下载)：http://iscream-1255662981.cos.ap-chengdu.myqcloud.com/iscreamVideo.mp4?sign=q
+        //-sign-algorithm%3Dsha1%26q-ak%3DAKIDvERSIwC6OVTGtKFomYuRofxFNJZlZdIm%26q-sign-time%3D1541658398%3B1857018398%26q-
+        //key-time%3D1541658398%3B1857018398%26q-
+        //header-list%3D%26q-url-param-list%3D%26q-signature%3D0982cc709c108cd99d074404f8c2c645410b6afb
     }
 
 }
